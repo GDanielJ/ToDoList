@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace ToDoList.Models
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
         public string Gender { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }
