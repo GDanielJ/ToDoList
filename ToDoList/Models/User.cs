@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ToDoList.Models
 {
-    public class User : IdentityUser<int>
+    public class User
     {
+        public int Id { get; set; }
+        public string UserName { get; set; }
         public string Gender { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
