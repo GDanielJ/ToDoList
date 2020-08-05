@@ -72,6 +72,8 @@ namespace ToDoList
 
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,6 +87,8 @@ namespace ToDoList
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // TODO - kan ändra AllowAnyOrigin till API:t senare. Säkrare!
 
             app.UseAuthentication();
             app.UseAuthorization();
