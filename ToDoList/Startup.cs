@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
 using ToDoList.Data;
 using ToDoList.Models;
 
@@ -75,6 +76,7 @@ namespace ToDoList
 
             services.AddCors();
 
+            services.AddAutoMapper(typeof(ToDoListRepository).Assembly);
             services.AddScoped<IToDoListRepository, ToDoListRepository>();
         }
 

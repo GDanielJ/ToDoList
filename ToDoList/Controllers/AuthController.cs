@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToDoList.Data;
+using ToDoList.Dtos;
 
 namespace ToDoList.Controllers
 {
@@ -11,9 +14,19 @@ namespace ToDoList.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public AuthController()
-        {
+        private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
+        public AuthController(IMapper mapper, DataContext context)
+        {
+            _mapper = mapper;
+            _context = context;
         }
+
+        //[HttpPost("register")]
+        //public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        //{
+            
+        //}
     }
 }
