@@ -32,5 +32,10 @@ namespace ToDoList.Data
         {
             throw new NotImplementedException();
         }
+
+        public Task<bool> UserExists(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
