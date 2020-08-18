@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace ToDoList.Data
 {
-    public class Seed
+    public class Seed // TODO - Denna funkar inte riktigt, utan seedar bara två användare. Fixa!
     {
         public static void SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
         {

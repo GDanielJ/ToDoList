@@ -13,6 +13,7 @@ namespace ToDoList.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<User, UserToReturnDto>();
         }
     }
 }
