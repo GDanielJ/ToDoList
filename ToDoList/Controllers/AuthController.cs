@@ -40,7 +40,7 @@ namespace ToDoList.Controllers
             {
                 var userToReturn = _mapper.Map<UserToReturnDto>(userToCreate);
 
-                return StatusCode(201); // TODO - Byt ut till CreatedAtRoute när UserRepository är på plats och GetUser är skapad.
+                return CreatedAtRoute("GetUser", new { controller = "User", id = userToCreate.Id }, userToReturn);
             }
 
             return BadRequest(result.Errors);
