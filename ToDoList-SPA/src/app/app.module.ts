@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { TodolistListComponent } from './todolist-list/todolist-list.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutes } from './routes';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { appRoutes } from './routes';
     AppComponent,
     NavComponent,
     TodolistListComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
