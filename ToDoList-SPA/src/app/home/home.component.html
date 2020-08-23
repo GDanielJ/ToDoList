@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div>
+  <div *ngIf="!registerMode">
     <h1>
       Welcome to the To-Do-List web page!
     </h1>
@@ -7,7 +7,15 @@
       Register below to start using the application.
     </p>
     <div class="text-left">
-      <button class="btn btn-primary btn-lg">Register</button>
+      <button class="btn btn-primary btn-lg" (click)="registerToggle()">Register</button>
+    </div>
+  </div>
+
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <app-register></app-register>
+      </div>
     </div>
   </div>
 </div>
