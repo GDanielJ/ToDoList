@@ -10,6 +10,7 @@ import { TodolistListComponent } from './todolist-list/todolist-list.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutes } from './routes';
 import { RegisterComponent } from './register/register.component';
+import { AuthService } from './_services/auth.service';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
