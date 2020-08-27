@@ -21,12 +21,14 @@ namespace ToDoList.Controllers
         private readonly IMapper _mapper;
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthController(IMapper mapper, DataContext context, UserManager<User> userManager)
+        public AuthController(IMapper mapper, DataContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _mapper = mapper;
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpPost("register")]
@@ -44,6 +46,27 @@ namespace ToDoList.Controllers
             }
 
             return BadRequest(result.Errors);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        {
+            var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
+
+            if (result.Succeeded)
+            {
+                var appUser = _mapper.Map<UserToReturnDto>(user);
+
+                return Ok(new
+                {
+                    // token = GenerateJwtToken()..... TODO - skapa metod för att generera token
+                    user = appUser
+                });
+            }
+
+            return Unauthorized();
         }
     }
 }
