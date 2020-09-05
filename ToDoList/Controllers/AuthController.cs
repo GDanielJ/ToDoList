@@ -69,7 +69,7 @@ namespace ToDoList.Controllers
 
                 return Ok(new
                 {
-                    // token = GenerateJwtToken()..... TODO - skapa metod för att generera token
+                    token = GenerateJwtToken(user).Result,
                     user = appUser
                 });
             }
