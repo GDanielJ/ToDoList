@@ -27,7 +27,8 @@
            class="form-control"
            formControlName="dateOfBirth"
            placeholder="Date of Birth"
-           type="date" />
+           type="text"
+           bsDatepicker />
     <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">
           Please select a date of birth</div>
   </div>

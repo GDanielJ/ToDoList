@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { appRoutes } from './routes';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './_services/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -23,10 +25,13 @@ import { AuthService } from './_services/auth.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    BsDatepickerModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService
