@@ -1,5 +1,5 @@
 
-export interface User { // TODO - Ej klar!
+export interface User {
   id: number;
   userName: string;
   gender: string;

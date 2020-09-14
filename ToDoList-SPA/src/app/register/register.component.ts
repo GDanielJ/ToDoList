@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { User } from '../_models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +11,10 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  model: any = {}; // TODO - byt ut mot user
+  user: User;
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -30,13 +32,19 @@ export class RegisterComponent implements OnInit {
     }, { validator: this.passwordMatchValidator });
   }
 
-  register() { // TODO - kommenterat bort medan bygger en reactive form. Ta bort console.log sedan
-    //this.authService.register(this.model).subscribe(() => {
-    //  console.log('registration successful');
-    //}, error => {
-    //    console.log(error);
-    //});
-    console.log(this.registerForm.value);
+  register() {
+    if (this.registerForm.valid) {
+      this.user = Object.assign({}, this.registerForm.value);
+      this.authService.register(this.user).subscribe(() => {
+        console.log('Registration successful'); // TODO - Eventuellt använda Alertify?!
+      }, error => {
+        console.log(error); // TODO - Eventuellt använda Alertify?!
+      }, () => {
+          this.authService.login(this.user).subscribe(() => {
+            this.router.navigate(['/home']); // TODO - eventuellt ändra vart man landar efter inloggning
+          });
+      });
+    }
   }
 
   passwordMatchValidator(g: FormGroup) {
