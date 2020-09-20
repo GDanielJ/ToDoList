@@ -39,6 +39,13 @@ namespace ToDoList.Data
             return users;
         }
 
+        public async Task<IEnumerable<ToDoListItem>> GetItems(int id)
+        {
+            var items = await _context.ToDoListItems.ToListAsync();
+
+            return items;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
