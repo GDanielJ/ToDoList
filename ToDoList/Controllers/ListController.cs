@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -33,5 +34,38 @@ namespace ToDoList.Controllers
 
             return Ok(itemsToReturn);
         }
+
+        [HttpGet("{id}", Name = "GetItem")]
+        public async Task<IActionResult> GetItem(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var itemFromRepo = _repo.GetItem(id);
+
+            if (itemFromRepo == null)
+                return NotFound();
+
+            var itemToReturn = _mapper.Map<ToDoListItemToReturnDto>(itemFromRepo);
+
+            return Ok(itemToReturn);
+        }
+
+
+        //[HttpPost()]
+        //public async Task<IActionResult> CreateToDoListItem(int userId, ToDoListItemToCreateDto toDoListItemToCreateDto)
+        //{
+        //    if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //        return Unauthorized();
+
+        //    var item = _mapper.Map<ToDoListItem>(toDoListItemToCreateDto);
+
+        //    _repo.Add(item);
+
+        //    if(await _repo.SaveAll())
+        //    {
+        //        var itemToReturn = _repo.GetItem(item.Id);
+        //    }
+        //}
     }
 }

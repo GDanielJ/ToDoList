@@ -15,6 +15,7 @@ namespace ToDoList.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserToReturnDto>();
             CreateMap<ToDoListItem, ToDoListItemToReturnDto>();
+            CreateMap<ToDoListItemToCreateDto, ToDoListItem>();
         }
     }
 }

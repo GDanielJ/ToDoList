@@ -45,6 +45,10 @@ namespace ToDoList.Data
 
             return items;
         }
+        public async Task<ToDoListItem> GetItem(int id)
+        {
+            return await _context.ToDoListItems.FirstOrDefaultAsync(i => i.Id == id);
+        }
 
         public async Task<bool> SaveAll()
         {

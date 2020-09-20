@@ -14,5 +14,6 @@ namespace ToDoList.Data
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(int id);
         Task<IEnumerable<ToDoListItem>> GetItems(int id);
+        Task<ToDoListItem> GetItem(int id);
     }
 }
