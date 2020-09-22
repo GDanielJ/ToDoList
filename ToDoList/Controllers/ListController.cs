@@ -28,6 +28,9 @@ namespace ToDoList.Controllers
         [HttpGet]
         public async Task<IActionResult> GetItems(int userId)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var items = await _repo.GetItems(userId);
 
             var itemsToReturn = _mapper.Map<IEnumerable<ToDoListItemToReturnDto>>(items);
@@ -41,7 +44,7 @@ namespace ToDoList.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var itemFromRepo = _repo.GetItem(id);
+            var itemFromRepo = await _repo.GetItem(id);
 
             if (itemFromRepo == null)
                 return NotFound();
@@ -52,20 +55,25 @@ namespace ToDoList.Controllers
         }
 
 
-        //[HttpPost()]
-        //public async Task<IActionResult> CreateToDoListItem(int userId, ToDoListItemToCreateDto toDoListItemToCreateDto)
-        //{
-        //    if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //        return Unauthorized();
+        [HttpPost()]
+        public async Task<IActionResult> CreateToDoListItem(int userId, ToDoListItemToCreateDto toDoListItemToCreateDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
-        //    var item = _mapper.Map<ToDoListItem>(toDoListItemToCreateDto);
+            toDoListItemToCreateDto.UserId = userId;
 
-        //    _repo.Add(item);
+            var item = _mapper.Map<ToDoListItem>(toDoListItemToCreateDto);
 
-        //    if(await _repo.SaveAll())
-        //    {
-        //        var itemToReturn = _repo.GetItem(item.Id);
-        //    }
-        //}
+            _repo.Add(item);
+
+            if (await _repo.SaveAll())
+            {
+                var itemToReturn = _mapper.Map<ToDoListItemToReturnDto>(item);
+                return CreatedAtRoute("GetItem", new { userId, id = item.Id }, itemToReturn);
+            }
+
+            throw new Exception("Failed to create list item on save");
+        }
     }
 }

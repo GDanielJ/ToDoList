@@ -7,11 +7,11 @@ namespace ToDoList.Dtos
 {
     public class ToDoListItemToCreateDto
     {
-        public int Id { get; set; }
         public string ItemText { get; set; }
         public DateTime Created { get; set; }
         public DateTime CompleteBy { get; set; }
         public bool Completed { get; set; }
+        public int UserId { get; set; }
 
         public ToDoListItemToCreateDto()
         {
