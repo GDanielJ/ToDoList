@@ -6,4 +6,6 @@ export interface User {
   city: string;
   country: string;
   dateOfBirth: Date;
+  created: Date;
+  lastActive: any;
 }
