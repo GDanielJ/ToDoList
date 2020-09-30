@@ -3,11 +3,11 @@
     <a class="navbar-brand" href="#">To-do-list App</a>
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li *ngIf="loggedIn()" class="nav-item">
-        <a class="nav-link" href="#">My lists</a>
+      <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/todolists']">My lists</a>
       </li>
     </ul>
 

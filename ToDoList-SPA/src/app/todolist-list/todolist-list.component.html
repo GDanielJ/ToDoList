@@ -1,1 +1,8 @@
-<p>todolist-list works!</p>
+<div *ngFor="let item of items">
+  <p>
+    {{item.id}}
+  </p>
+  <p>
+    {{item.itemText}}
+  </p>
+</div>
