@@ -14,7 +14,7 @@ namespace ToDoList.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous] // TODO - Ta bort när lagt till Jwt token
+    //[AllowAnonymous] // TODO - Ta bort när lagt till Jwt token
     public class UserController : ControllerBase
     {
         private readonly IToDoListRepository _repo;
