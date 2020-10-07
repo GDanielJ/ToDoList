@@ -5,7 +5,14 @@ import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'todolists', component: TodolistListComponent, canActivate: [AuthGuard] },
+  { // Denna är egentligen onödig (bara ett "child" just nu), men blir användbart när man har många komponenter
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'todolists', component: TodolistListComponent }
+    ]
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
