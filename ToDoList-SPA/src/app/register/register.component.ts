@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
         console.log(error); // TODO - Eventuellt använda Alertify?!
       }, () => {
           this.authService.login(this.user).subscribe(() => {
-            this.router.navigate(['/home']); // TODO - eventuellt ändra vart man landar efter inloggning
+            this.router.navigate(['/todolists']);
           });
       });
     }
