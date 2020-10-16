@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { ListItem } from '../_models/list-item';
 import { AuthService } from '../_services/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-todolist-list',
@@ -10,11 +11,13 @@ import { AuthService } from '../_services/auth.service';
 })
 export class TodolistListComponent implements OnInit {
   items: ListItem[];
+  listsForm: FormGroup;
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private userService: UserService, private authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.loadToDoList();
+    this.createListsForm();
   }
 
   loadToDoList() {
@@ -22,6 +25,16 @@ export class TodolistListComponent implements OnInit {
       this.items = items;
     }, error => {
       console.log(error);
+    });
+  }
+
+  createListsForm() {
+    this.listsForm = this.fb.group({
+      id: [''],
+      itemText: [''],
+      created: [''],
+      completedBy: [''],
+      completed: ['']
     });
   }
 
