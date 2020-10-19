@@ -1,9 +1,36 @@
 <form [formGroup]="listsForm">
-  <h2 class="text-center text-primary">
+  <h2 class="text-center text-primary mt-2">
     Here are your things to do:
   </h2>
 
-  <div class="form-group text-center" *ngFor="let item of items">
-    {{item.id}}, {{item.itemText}}, {{item.created}}, {{item.completedBy}}, {{item.completed}}
+
+
+  <div class="form-group text-center mt-4">
+    <div class="row m-2">
+      <div class="col-sm-2">
+        <label>Item id</label>
+      </div>
+      <div class="col-sm-2">
+        <label>What to do?</label>
+      </div>
+      <div class="col-sm-2">
+        <label>Created</label>
+      </div>
+      <div class="col-sm-2">
+        <label>Complete by</label>
+      </div>
+      <div class="col-sm-2">
+        <label>Done?</label>
+      </div>
+    </div>
+    
+    <div class="row m-2" *ngFor="let item of items">
+      <div class="col-sm-2">{{item.id}}</div>
+      <div class="col-sm-2">{{item.itemText}}</div>
+      <div class="col-sm-2">{{item.created}}</div>
+      <div class="col-sm-2">{{item.completeBy}}</div>
+      <div class="col-sm-2">{{item.completed}}</div>
+      <button class="btn-danger">Delete</button>
+    </div>
   </div>
 </form>

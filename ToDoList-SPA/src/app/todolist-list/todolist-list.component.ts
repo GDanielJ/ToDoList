@@ -28,12 +28,13 @@ export class TodolistListComponent implements OnInit {
     });
   }
 
+  // https://coryrylan.com/blog/creating-a-dynamic-checkbox-list-in-angular
   createListsForm() {
     this.listsForm = this.fb.group({
       id: [''],
       itemText: [''],
       created: [''],
-      completedBy: [''],
+      completeBy: [''],
       completed: ['']
     });
   }

@@ -2,6 +2,6 @@ export interface ListItem {
   id: number;
   itemText: string;
   created: Date;
-  completedBy: Date;
+  completeBy: Date;
   completed: boolean;
 }
