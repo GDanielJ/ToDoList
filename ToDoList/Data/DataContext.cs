@@ -34,6 +34,14 @@ namespace ToDoList.Data
                 .HasForeignKey(ur => ur.UserId)
                 .IsRequired();
             });
+
+            builder.Entity<ToDoListItem>(li =>
+            {
+                li.HasOne(u => u.User)
+                .WithMany(l => l.ToDoListItems)
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }

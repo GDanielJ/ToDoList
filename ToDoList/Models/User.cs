@@ -15,5 +15,6 @@ namespace ToDoList.Models
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<ToDoListItem> ToDoListItems { get; set; }
     }
 }
