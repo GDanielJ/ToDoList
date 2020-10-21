@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div *ngIf="!registerMode">
+  <div *ngIf="!registerMode && !loggedIn()">
     <h1>
       Welcome to the To-Do-List web page!
     </h1>
@@ -18,5 +18,12 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="!registerMode && loggedIn()">
+    <h2 class="">
+      Click on "My lists" above to check what's on your to-do list!
+    </h2>
+  </div>
+
 </div>
 
