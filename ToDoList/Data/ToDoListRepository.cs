@@ -41,7 +41,7 @@ namespace ToDoList.Data
 
         public async Task<IEnumerable<ToDoListItem>> GetItems(int id)
         {
-            var items = await _context.ToDoListItems.ToListAsync();
+            var items = await _context.ToDoListItems.Where(i => i.UserId == id).ToListAsync();
 
             return items;
         }

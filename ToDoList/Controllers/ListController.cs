@@ -49,6 +49,9 @@ namespace ToDoList.Controllers
             if (itemFromRepo == null)
                 return NotFound();
 
+            if (userId != itemFromRepo.UserId)
+                return Unauthorized();
+
             var itemToReturn = _mapper.Map<ToDoListItemToReturnDto>(itemFromRepo);
 
             return Ok(itemToReturn);
@@ -76,8 +79,17 @@ namespace ToDoList.Controllers
             throw new Exception("Failed to create list item on save");
         }
 
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateToDoListItem(int userId, int id, ToDoListItemToUpdateDto doListItemToUpdateDto)
+        //{
+        //    if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //        return Unauthorized();
+
+
+        //}
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteListItem(int userId, int id)
+        public async Task<IActionResult> DeleteToDoListItem(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -86,6 +98,9 @@ namespace ToDoList.Controllers
 
             if (itemToDelete == null)
                 return NotFound();
+
+            if (userId != itemToDelete.UserId)
+                return Unauthorized();
 
             _repo.Delete(itemToDelete);
 
