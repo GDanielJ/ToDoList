@@ -76,15 +76,23 @@ namespace ToDoList.Controllers
             throw new Exception("Failed to create list item on save");
         }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteListItem(int userId, int id)
-        //{
-        //    if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //        return Unauthorized();
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteListItem(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
-        //    var itemToDelete = await _repo.GetItem(id);
+            var itemToDelete = await _repo.GetItem(id);
 
-        //    if ()
-        //}
+            if (itemToDelete == null)
+                return NotFound();
+
+            _repo.Delete(itemToDelete);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete the list item");
+        }
     }
 }
