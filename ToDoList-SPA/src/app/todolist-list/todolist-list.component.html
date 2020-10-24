@@ -30,7 +30,7 @@
       <div class="col-sm-2">{{item.created | date:'mediumDate'}}</div>
       <div class="col-sm-2">{{item.completeBy | date:'mediumDate'}}</div>
       <div class="col-sm-2">{{item.completed}}</div>
-      <button class="btn-danger">Delete</button>
+      <button class="btn-danger" (click)="deleteListItem(item.id)">Delete</button>
     </div>
   </div>
 </form>

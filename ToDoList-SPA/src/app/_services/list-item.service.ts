@@ -18,8 +18,11 @@ export class ListItemService {
 
   constructor(private http: HttpClient) { }
 
-  getItems(id: number): Observable<ListItem[]> {
-    return this.http.get<ListItem[]>(this.baseUrl + 'user/' + id + '/list', httpOptions);
+  getItems(userId: number): Observable<ListItem[]> {
+    return this.http.get<ListItem[]>(this.baseUrl + 'user/' + userId + '/list', httpOptions);
   }
 
+  deleteListItem(userId: number, id: number) {
+    return this.http.delete<ListItem>(this.baseUrl + 'user/' + userId + '/list/' + id, httpOptions);
+  }
 }

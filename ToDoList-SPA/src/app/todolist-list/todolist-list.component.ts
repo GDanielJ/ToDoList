@@ -40,8 +40,13 @@ export class TodolistListComponent implements OnInit {
     });
   }
 
-  deleteListItem() {
-
+  deleteListItem(id: number) {
+    this.listItemService.deleteListItem(this.authService.decodedToken.nameid, id).subscribe(() => {
+      this.items.splice(this.items.findIndex(m => m.id === id), 1);
+      console.log('Item deleted');
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
