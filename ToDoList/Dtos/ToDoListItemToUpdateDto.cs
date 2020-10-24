@@ -16,7 +16,5 @@ namespace ToDoList.Dtos
         public DateTime CompleteBy { get; set; }
         [Required]
         public bool Completed { get; set; }
-        //[Required]
-        //public int UserId { get; set; }
     }
 }

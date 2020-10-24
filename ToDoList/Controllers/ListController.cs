@@ -79,14 +79,27 @@ namespace ToDoList.Controllers
             throw new Exception("Failed to create list item on save");
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateToDoListItem(int userId, int id, ToDoListItemToUpdateDto doListItemToUpdateDto)
-        //{
-        //    if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //        return Unauthorized();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateToDoListItem(int userId, int id, ToDoListItemToUpdateDto toDoListItemToUpdateDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
+            var itemFromRepo = await _repo.GetItem(id);
 
-        //}
+            if (itemFromRepo == null)
+                return NotFound();
+
+            if (userId != itemFromRepo.UserId)
+                return Unauthorized();
+
+            _mapper.Map(toDoListItemToUpdateDto, itemFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Update item {id} for user {userId} failed on save");
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteToDoListItem(int userId, int id)
