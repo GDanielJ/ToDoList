@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ListItem } from '../_models/list-item';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,16 +13,13 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ListItemService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + 'user', httpOptions);
+  getItems(id: number): Observable<ListItem[]> {
+    return this.http.get<ListItem[]>(this.baseUrl + 'user/' + id + '/list', httpOptions);
   }
 
-  getUser(id): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'user/' + id, httpOptions);
-  }
 }
