@@ -15,6 +15,7 @@ import { appRoutes } from './routes';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './_services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditTodolistItemComponent } from './edit-todolist-item/edit-todolist-item.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -26,7 +27,8 @@ export function tokenGetter() {
     NavComponent,
     TodolistListComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditTodolistItemComponent
   ],
   imports: [
     BrowserModule,
