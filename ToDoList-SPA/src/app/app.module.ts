@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthService } from './_services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTodolistItemComponent } from './edit-todolist-item/edit-todolist-item.component';
+import { EditItemResolver } from './_resolvers/edit-item.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -49,7 +50,8 @@ export function tokenGetter() {
     })
   ],
   providers: [
-    AuthService
+    AuthService,
+    EditItemResolver
   ],
   bootstrap: [AppComponent]
 })

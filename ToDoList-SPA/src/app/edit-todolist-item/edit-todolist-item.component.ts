@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ListItem } from '../_models/list-item';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-todolist-item',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTodolistItemComponent implements OnInit {
 
-  constructor() { }
+  itemForEdit: ListItem;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.itemForEdit = data['itemForEdit'];
+    });
   }
 
 }
