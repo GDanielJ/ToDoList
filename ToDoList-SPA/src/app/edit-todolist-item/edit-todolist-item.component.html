@@ -1,1 +1,33 @@
-<p>edit-todolist-item works!</p>
+<form [formGroup]="editItemForm" (ngSubmit)="updateItem()">
+  <h2>
+    Edit your to-do-list item:
+  </h2>
+
+  <div class="form-group">
+    {{itemForEdit.id}}
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="itemText" />
+  </div>
+
+  <div class="form-group">
+    <input class="form-control"
+           formControlName="completeBy"
+           type="text"
+           bsDatepicker />
+  </div>
+
+  <div class="form-group">
+    <label>
+      Is this item done?
+      <input class="ml-3" type="checkbox" formControlName="completed" />
+    </label>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-success" type="submit">Update</button>
+    <button class="btn btn-danger" type="button" [routerLink]="['/todolists']">Cancel</button>
+  </div>
+
+</form>
