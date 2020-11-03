@@ -26,6 +26,10 @@ export class ListItemService {
     return this.http.get<ListItem[]>(this.baseUrl + 'user/' + userId + '/list', httpOptions);
   }
 
+  updateItem(userId: number, id: number, listItem: ListItem) {
+    return this.http.put<ListItem>(this.baseUrl + 'user/' + userId + '/list/' + id, listItem, httpOptions);
+  }
+
   deleteListItem(userId: number, id: number) {
     return this.http.delete<ListItem>(this.baseUrl + 'user/' + userId + '/list/' + id, httpOptions);
   }
