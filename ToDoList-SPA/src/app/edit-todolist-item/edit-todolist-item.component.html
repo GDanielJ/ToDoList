@@ -1,31 +1,32 @@
 <form [formGroup]="editItemForm" (ngSubmit)="updateItem()">
-  <h2>
+  <h2 class="text-center text-primary">
     Edit your to-do-list item:
   </h2>
 
-  <div class="form-group">
-    {{itemForEdit.id}}
+  <div class="form-group d-flex justify-content-center">
+    <label>Item id: {{itemForEdit.id}}</label>
   </div>
 
-  <div class="form-group">
-    <input type="text" class="form-control" formControlName="itemText" />
+  <div class="form-group d-flex justify-content-center">
+    <textarea class="form-control" rows="6" formControlName="itemText" style="width:500px; height: 150px"></textarea>
   </div>
 
-  <div class="form-group">
-    <input class="form-control"
+  <div class="form-group d-flex justify-content-center">
+    <input class="form-control text-center"
+           style="width:150px"
            formControlName="completeBy"
            type="text"
            bsDatepicker />
   </div>
 
-  <div class="form-group">
+  <div class="form-group d-flex justify-content-center">
     <label>
       Is this item done?
       <input class="ml-3" type="checkbox" formControlName="completed" />
     </label>
   </div>
 
-  <div class="form-group">
+  <div class="form-group d-flex justify-content-center">
     <button class="btn btn-success" type="submit">Update</button>
     <button class="btn btn-danger" type="button" [routerLink]="['/todolists']">Cancel</button>
   </div>

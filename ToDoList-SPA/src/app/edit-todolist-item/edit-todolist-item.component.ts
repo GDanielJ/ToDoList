@@ -43,7 +43,7 @@ export class EditTodolistItemComponent implements OnInit {
     });
   }
 
-  updateItem() { // TODO - Snygga till html. Lägg till Validators och en if-sats här så att man bara kan uppdatera om valid.
+  updateItem() { // TODO - Lägg till Validators och en if-sats här så att man bara kan uppdatera om valid.
     this.itemForEdit = Object.assign({}, this.editItemForm.value);
     this.listItemService.updateItem(this.authService.decodedToken.nameid, this.itemForEdit.id, this.itemForEdit).subscribe(() => {
       console.log("Update successful")
