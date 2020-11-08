@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +15,6 @@ namespace ToDoList.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[AllowAnonymous] // TODO - Ta bort när lagt till Jwt token
     public class UserController : ControllerBase
     {
         private readonly IToDoListRepository _repo;
@@ -45,6 +45,25 @@ namespace ToDoList.Controllers
             var userToReturn = _mapper.Map<UserToReturnDto>(user);
 
             return Ok(userToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var userFromDb = await _repo.GetUser(id);
+
+            if (userFromDb == null)
+                return NotFound();
+
+            _mapper.Map(userForUpdateDto, userFromDb);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Failed to update user with id {userFromDb.Id}");
         }
     }
 }
