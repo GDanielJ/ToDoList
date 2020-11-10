@@ -17,6 +17,8 @@ import { AuthService } from './_services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTodolistItemComponent } from './edit-todolist-item/edit-todolist-item.component';
 import { EditItemResolver } from './_resolvers/edit-item.resolver';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUserResolver } from './_resolvers/edit-user.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -29,7 +31,8 @@ export function tokenGetter() {
     TodolistListComponent,
     HomeComponent,
     RegisterComponent,
-    EditTodolistItemComponent
+    EditTodolistItemComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ export function tokenGetter() {
   ],
   providers: [
     AuthService,
-    EditItemResolver
+    EditItemResolver,
+    EditUserResolver
   ],
   bootstrap: [AppComponent]
 })
