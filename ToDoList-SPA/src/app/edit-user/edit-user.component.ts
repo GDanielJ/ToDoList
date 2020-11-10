@@ -33,7 +33,11 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  updateUser() { // TODO - fixa metod!
+  updateUser() { // TODO - fixa metoder!!
+
+  }
+
+  cancel() {
 
   }
 

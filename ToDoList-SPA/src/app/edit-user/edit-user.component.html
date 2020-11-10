@@ -1,35 +1,52 @@
-<form formGroup="updateUserForm" (ngSubmit)="updateUser()">
-  <h2>
-    Update your user details
-  </h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5" justify-content-center>
+      <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
 
-  <div class="form-group">
-    <input [ngClass]="{'is-invalid': updateUserForm.get('city').errors}"
-           type="text"
-           class="form-control"
-           formControlName="city"/>
-    <div class="invalid-feedback" *ngIf="updateUserForm.get('city').hasError('required')">
-      City is required
+        <h2 class="text-primary text-center mt-2">
+          Update your user details
+        </h2>
+
+        <div class="mb-1">
+          The city you live in:
+        </div>
+        <div class="form-group">
+          <input [ngClass]="{'is-invalid': updateUserForm.get('city').errors}"
+                 class="form-control"
+                 formControlName="city"
+                 type="text" />
+          <div class="invalid-feedback" *ngIf="updateUserForm.get('city').hasError('required')">
+            City is required
+          </div>
+        </div>
+
+        <div class="mb-1">
+          The country you are from:
+        </div>
+        <div class="form-group">
+          <input [ngClass]="{'is-invalid': updateUserForm.get('country').errors}"
+                 class="form-control"
+                 type="text"
+                 formControlName="country" />
+          <div class="invalid-feedback" *ngIf="updateUserForm.get('country').hasError('required')">
+            Country is required
+          </div>
+        </div>
+
+        <div class="mb-1">
+          The date you were born:
+        </div>
+        <div class="form-group">
+          <input [ngClass]="{'is-invalid': updateUserForm.get('dateOfBirth').errors}"
+                 type="text"
+                 formControlName="dateOfBirth"
+                 bsDatepicker />
+          <div class="invalid-feedback" *ngIf="updateUserForm.get('dateOfBirth').hasError('required')">
+            Date of birth is required
+          </div>
+        </div>
+
+      </form>
     </div>
   </div>
-
-  <div class="form-group">
-    <input [ngClass]="{'is-invalid': updateUserForm.get('country').errors}"
-           type="text"
-           class="form-control"
-           formControlName="country"/>
-    <div class="invalid-feedback" *ngIf="updateUserForm.get('country').hasError('required')">
-      Country is required
-    </div>
-  </div>
-
-  <div class="form-group">
-    <input [ngClass]="{'is-invalid': updateUserForm.get('dateOfBirth').errors}"
-           type="text"
-           bsDatepicker />
-    <div class="invalid-feedback" *ngIf="updateUserForm.get('dateOfBirth').hasError('required')">
-      Date of birth is required
-    </div>
-  </div>
-
-</form>
+</div>
