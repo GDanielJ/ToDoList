@@ -36,9 +36,9 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(() => {
-        console.log('Registration successful'); // TODO - Eventuellt använda Alertify?!
+        console.log('Registration successful');
       }, error => {
-        console.log(error); // TODO - Eventuellt använda Alertify?!
+        console.log(error);
       }, () => {
           this.authService.login(this.user).subscribe(() => {
             this.router.navigate(['/todolists']);

@@ -24,6 +24,7 @@ using ToDoList.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using ToDoList.Helpers;
+using Microsoft.AspNetCore.Mvc.Cors;
 
 namespace ToDoList
 {
@@ -115,7 +116,7 @@ namespace ToDoList
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // TODO - kan ändra AllowAnyOrigin till API:t senare. Säkrare!
+            app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();
