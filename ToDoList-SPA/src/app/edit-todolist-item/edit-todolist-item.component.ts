@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListItem } from '../_models/list-item';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { ListItemService } from '../_services/list-item.service';
 
@@ -38,19 +38,21 @@ export class EditTodolistItemComponent implements OnInit {
       id: [this.itemForEdit.id],
       itemText: [this.itemForEdit.itemText],
       created: [dateCreated],
-      completeBy: [dateCompleteBy],
+      completeBy: [dateCompleteBy, Validators.required],
       completed: [this.itemForEdit.completed]
     });
   }
 
-  updateItem() { // TODO - Lägg till Validators och en if-sats här så att man bara kan uppdatera om valid.
-    this.itemForEdit = Object.assign({}, this.editItemForm.value);
-    this.listItemService.updateItem(this.authService.decodedToken.nameid, this.itemForEdit.id, this.itemForEdit).subscribe(() => {
-      console.log("Update successful")
-    }, error => {
-      console.log(error);
-    }, () => {
+  updateItem() { //TODO - Snygga till. Fick inte till CSS:en i HTML-filen så snyggt.
+    if (this.editItemForm.valid) {
+      this.itemForEdit = Object.assign({}, this.editItemForm.value);
+      this.listItemService.updateItem(this.authService.decodedToken.nameid, this.itemForEdit.id, this.itemForEdit).subscribe(() => {
+        console.log("Update successful")
+      }, error => {
+        console.log(error);
+      }, () => {
         this.router.navigate(['/todolists']);
-    });
+      });
+    }
   }
 }
